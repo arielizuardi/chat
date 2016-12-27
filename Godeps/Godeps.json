@@ -1,0 +1,69 @@
+{
+	"ImportPath": "github.com/arielizuardi/chat",
+	"GoVersion": "go1.7",
+	"GodepVersion": "v70",
+	"Deps": [
+		{
+			"ImportPath": "github.com/arielizuardi/trace",
+			"Rev": "797dc971d13572ac6566f0eaafcad5e9b6e30200"
+		},
+		{
+			"ImportPath": "github.com/gorilla/context",
+			"Rev": "1c83b3eabd45b6d76072b66b746c20815fb2872d"
+		},
+		{
+			"ImportPath": "github.com/gorilla/mux",
+			"Rev": "9c068cf16d982f8bd444b8c352acbeec34c4fe5b"
+		},
+		{
+			"ImportPath": "github.com/gorilla/securecookie",
+			"Comment": "v1.1-5-gfa5329f",
+			"Rev": "fa5329f913702981df43dcb2a380bac429c810b5"
+		},
+		{
+			"ImportPath": "github.com/gorilla/sessions",
+			"Comment": "v1.1-2-g83c8db3",
+			"Rev": "83c8db3bdc9be789e57e3756ffbcffd2d7d40176"
+		},
+		{
+			"ImportPath": "github.com/gorilla/websocket",
+			"Rev": "361d4c0ffd78338ebe0a9e6320cdbe115d7dc026"
+		},
+		{
+			"ImportPath": "github.com/markbates/goth",
+			"Rev": "a185bfa1e93d394cdc958b8f34206dd70121c7a6"
+		},
+		{
+			"ImportPath": "github.com/markbates/goth/gothic",
+			"Rev": "a185bfa1e93d394cdc958b8f34206dd70121c7a6"
+		},
+		{
+			"ImportPath": "github.com/markbates/goth/providers/facebook",
+			"Rev": "a185bfa1e93d394cdc958b8f34206dd70121c7a6"
+		},
+		{
+			"ImportPath": "github.com/markbates/goth/providers/github",
+			"Rev": "a185bfa1e93d394cdc958b8f34206dd70121c7a6"
+		},
+		{
+			"ImportPath": "github.com/markbates/goth/providers/gplus",
+			"Rev": "a185bfa1e93d394cdc958b8f34206dd70121c7a6"
+		},
+		{
+			"ImportPath": "github.com/stretchr/objx",
+			"Rev": "1a9d0bb9f541897e62256577b352fdbc1fb4fd94"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "cfae461cedfdcab6e261a26eb77db53695623303"
+		},
+		{
+			"ImportPath": "golang.org/x/oauth2",
+			"Rev": "65a8d08c6292395d47053be10b3c5e91960def76"
+		},
+		{
+			"ImportPath": "golang.org/x/oauth2/internal",
+			"Rev": "65a8d08c6292395d47053be10b3c5e91960def76"
+		}
+	]
+}
