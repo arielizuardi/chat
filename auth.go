@@ -2,16 +2,22 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 
-	"github.com/stretchr/gomniauth"
+	"github.com/markbates/goth/gothic"
 	"github.com/stretchr/objx"
 )
 
 type authHandler struct {
 	next http.Handler
+}
+
+func getProviderName(r *http.Request) (string, error) {
+	segs := strings.Split(r.URL.Path, "/")
+	provider := segs[3]
+
+	return provider, nil
 }
 
 func (h *authHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
@@ -35,42 +41,31 @@ func MustAuth(handler http.Handler) http.Handler {
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	segs := strings.Split(r.URL.Path, "/")
 	action := segs[2]
-	provider := segs[3]
+
+	gothic.GetProviderName = getProviderName
+
 	switch action {
 	case "login":
-		provider, err := gomniauth.Provider(provider)
+		url, err := gothic.GetAuthURL(w, r)
 		if err != nil {
-			log.Fatalln("Error when trying to get provider", provider, "-", err)
+			w.WriteHeader(http.StatusBadRequest)
+			fmt.Fprintln(w, err)
+			return
 		}
 
-		loginURL, err := provider.GetBeginAuthURL(nil, nil)
-		if err != nil {
-			log.Println("TODO handle login for provider", provider)
-			log.Fatalln("Error when trying to GetBeginAuthURL for", provider, "-", err)
-		}
-
-		w.Header().Set("Location", loginURL)
-		w.WriteHeader(http.StatusTemporaryRedirect)
+		http.Redirect(w, r, url, http.StatusTemporaryRedirect)
 	case "callback":
-		provider, err := gomniauth.Provider(provider)
-		if err != nil {
-			log.Fatalln("Error when trying to get provider", provider, "-", err)
-		}
 
-		creds, err := provider.CompleteAuth(objx.MustFromURLQuery(r.URL.RawQuery))
+		user, err := gothic.CompleteUserAuth(w, r)
 		if err != nil {
-			log.Fatalln("Error when trying to complete auth for", provider, "-", err)
-		}
-
-		user, err := provider.GetUser(creds)
-		if err != nil {
-			log.Fatalln("Error when trying to get user from", provider, "-", err)
+			fmt.Fprintln(w, err)
+			return
 		}
 
 		authCookieValue := objx.New(map[string]interface{}{
-			"name":       user.Name(),
-			"avatar_url": user.AvatarURL(),
-			"email":      user.Email(),
+			"name":       user.Name,
+			"avatar_url": user.AvatarURL,
+			"email":      user.Email,
 		}).MustBase64()
 
 		http.SetCookie(w, &http.Cookie{
