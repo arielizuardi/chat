@@ -25,7 +25,7 @@ Open Your Browser and login with your Google Account
 http://localhost:3000
 ```
 
-### Tutorial
+# Tutorial
 
 ## Membuat aplikasi Chat menggunakan Golang, OAuth2, dan Gravatar
 
@@ -135,7 +135,7 @@ func (t *templateHandler) ServeHTTP (w http.ResponseWriter, r *http.Request) {
 }
 ```
 
-`templateHandle` memiliki method `ServeHTTP` dimana parameter yang di masukkan sama seperti method `http.HandleFunc` yang sebelumnya telah kita buat. Method `ServeHTTP` memenuhi *interface*`http.HandlerFunc`. Maka kita dapat menggunakan method `ServeHTTP` di dalam method `http.HandleFunc`.
+`templateHandler` memiliki method `ServeHTTP` dimana parameter yang di masukkan sama seperti method `http.HandleFunc` yang sebelumnya telah kita buat. Method `ServeHTTP` memenuhi *interface*`http.HandlerFunc`. Maka kita dapat menggunakan method `ServeHTTP` di dalam method `http.HandleFunc`.
 
 Interface di dalam Go tidak didefinisikan secara explisit, namun di dalam Go, bila suatu struct mempunyai method yang sama dengan interface yang di deklarasikan, maka Go mengganggap tipe tersebut merupakan bagian dari tipe interface tersebut.
 
